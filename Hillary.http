@@ -1,0 +1,6 @@
+@Hillary_HostAddress = http://localhost:5137
+
+GET {{Hillary_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
