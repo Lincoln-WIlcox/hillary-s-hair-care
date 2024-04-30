@@ -1,8 +1,9 @@
+import AppointmentList from "../components/AppointmentList"
 
 const Appointments = () =>
 {
     return (
-        <p>appointments page</p>
+        <AppointmentList appointments={[]} />
     )
 }
 
