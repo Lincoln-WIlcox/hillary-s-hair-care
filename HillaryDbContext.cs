@@ -25,7 +25,7 @@ public class HillaryDbContext : DbContext
                         Id = 1,
                         StylistId = 1,
                         CustomerId = 1,
-                        ScheduledDate = new DateTime(2025, 2, 3)
+                        ScheduledDate = new DateTime(2024, 2, 3)
                     },
                     new Appointment
                     {

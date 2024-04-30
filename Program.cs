@@ -33,7 +33,7 @@ app.MapGet(
             .Appointments.Where(appointment => appointment.ScheduledDate > DateTime.Now)
             .ToList();
         
-        
+        return;
     }
 );
 
