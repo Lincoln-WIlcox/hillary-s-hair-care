@@ -1,6 +1,5 @@
-using System.Text.Json.Serialization;
 using Hillary.Models;
-using Microsoft.AspNetCore.Http.Json;
+using Hillary.Models.DTOs;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,10 +31,34 @@ app.MapGet(
         List<Appointment> returnAppointments = db
             .Appointments.Include(a => a.Stylist)
             .Include(a => a.Customer)
+            .Include(a => a.AppointmentServices)
+            .ThenInclude(a => a.Service)
             .Where(appointment => appointment.ScheduledDate > DateTime.Now)
             .ToList();
 
-        return;
+        return returnAppointments.Select(a => new GetAppointmentsDTO
+        {
+            Id = a.Id,
+            StylistId = a.StylistId,
+            CustomerId = a.CustomerId,
+            ScheduledDate = a.ScheduledDate,
+            Stylist = a.Stylist,
+            Customer = a.Customer,
+            AppointmentServices = a
+                .AppointmentServices.Select(asv => new GetAppointmentsAppointmentServicesDTO
+                {
+                    Id = asv.Id,
+                    AppointmentId = asv.AppointmentId,
+                    ServiceId = asv.ServiceId,
+                    Service = new GetAppointmentsAppointmentServicesServiceDTO
+                    {
+                        Id = asv.Service.Id,
+                        Name = asv.Service.Name,
+                        Price = asv.Service.Price
+                    }
+                })
+                .ToList()
+        });
     }
 );
 

@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace Hillary.Models.DTOs;
 
 public class GetAppointmentsDTO
@@ -8,9 +10,16 @@ public class GetAppointmentsDTO
     public DateTime ScheduledDate { get; set; }
     public Stylist Stylist { get; set; }
     public Customer Customer { get; set; }
-    public List<Service> Services { get; set; }
+    public List<GetAppointmentsAppointmentServicesDTO> AppointmentServices { get; set; }
     public decimal totalPrice
     {
-        get { return Services.Sum(service => service.Price); }
+        get
+        {
+            return AppointmentServices.Sum(appointmentService => appointmentService.Service.Price);
+        }
+    }
+    public string ScheduledDateText
+    {
+        get { return ScheduledDate.ToString(); }
     }
 }
