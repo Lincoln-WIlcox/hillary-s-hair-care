@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 public class HillaryDbContext : DbContext
 {
-    public DbSet<Appointment> Reservations { get; set; }
-    public DbSet<AppointmentService> UserProfiles { get; set; }
-    public DbSet<Customer> Campsites { get; set; }
-    public DbSet<Service> CampsiteTypes { get; set; }
+    public DbSet<Appointment> Appointments { get; set; }
+    public DbSet<AppointmentService> AppointmentServices { get; set; }
+    public DbSet<Customer> Customers { get; set; }
+    public DbSet<Service> Services { get; set; }
     public DbSet<Stylist> Stylists { get; set; }
 
     public HillaryDbContext(DbContextOptions<HillaryDbContext> context)

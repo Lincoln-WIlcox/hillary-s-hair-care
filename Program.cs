@@ -1,7 +1,7 @@
-using Hillary.Models;
-using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
+using Hillary.Models;
 using Microsoft.AspNetCore.Http.Json;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// allows passing datetimes without time zone data 
+// allows passing datetimes without time zone data
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 // allows our api endpoints to access the database through Entity Framework Core
@@ -29,6 +29,10 @@ app.MapGet(
     "/appointments/scheduled",
     (HillaryDbContext db) =>
     {
+        List<Appointment> returnAppointments = db
+            .Appointments.Where(appointment => appointment.ScheduledDate > DateTime.Now)
+            .ToList();
+        
         
     }
 );
