@@ -25,6 +25,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.MapGet(
+    "/appointments/scheduled",
+    (HillaryDbContext db) =>
+    {
+        
+    }
+);
+
 app.UseHttpsRedirection();
 
 app.Run();
