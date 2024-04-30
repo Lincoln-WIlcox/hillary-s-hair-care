@@ -12,6 +12,7 @@ const AppointmentList = ({ appointments }) =>
                             <span>{appointment.scheduledDate}</span>
                             <span>{appointment.stylist.name}</span>
                             <span>{appointment.customer.name}</span>
+                            <span>{appointment.totalPrice}</span>
                             <div>
                                 {
                                     appointment.services.map(service =>
