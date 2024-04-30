@@ -6,7 +6,11 @@ public class GetAppointmentsDTO
     public int StylistId { get; set; }
     public int CustomerId { get; set; }
     public DateTime ScheduledDate { get; set; }
-    public Stylist? Stylist { get; set; }
-    public Customer? Customer { get; set; }
+    public Stylist Stylist { get; set; }
+    public Customer Customer { get; set; }
     public List<Service> Services { get; set; }
+    public decimal totalPrice
+    {
+        get { return Services.Sum(service => service.Price); }
+    }
 }

@@ -30,9 +30,11 @@ app.MapGet(
     (HillaryDbContext db) =>
     {
         List<Appointment> returnAppointments = db
-            .Appointments.Where(appointment => appointment.ScheduledDate > DateTime.Now)
+            .Appointments.Include(a => a.Stylist)
+            .Include(a => a.Customer)
+            .Where(appointment => appointment.ScheduledDate > DateTime.Now)
             .ToList();
-        
+
         return;
     }
 );
