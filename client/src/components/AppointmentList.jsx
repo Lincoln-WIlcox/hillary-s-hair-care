@@ -9,17 +9,17 @@ const AppointmentList = ({ appointments }) =>
                 {
                     return (
                         <div>
-                            <span>{appointment.scheduledDate}</span>
+                            <span>{appointment.scheduledDateText}</span>
                             <span>{appointment.stylist.name}</span>
                             <span>{appointment.customer.name}</span>
                             <span>{appointment.totalPrice}</span>
                             <div>
                                 {
-                                    appointment.services.map(service =>
+                                    appointment.appointmentServices.map(appointmentService =>
                                     {
                                         return (
                                             <>
-                                                <span>{service.name}</span>
+                                                <span>{appointmentService.service.name}</span>
                                             </>
                                         )
                                     }

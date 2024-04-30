@@ -127,25 +127,25 @@ public class HillaryDbContext : DbContext
                     new Service
                     {
                         Id = 1,
-                        Name = "Customer 1",
+                        Name = "Service 1",
                         Price = 12.99M
                     },
                     new Service
                     {
                         Id = 2,
-                        Name = "Customer 2",
+                        Name = "Service 2",
                         Price = 13.99M
                     },
                     new Service
                     {
                         Id = 3,
-                        Name = "Customer 3",
+                        Name = "Service 3",
                         Price = 14.99M
                     },
                     new Service
                     {
                         Id = 4,
-                        Name = "Customer 4",
+                        Name = "Service 4",
                         Price = 15.99M
                     },
                 }
@@ -156,9 +156,9 @@ public class HillaryDbContext : DbContext
             .HasData(
                 new Stylist[]
                 {
-                    new Stylist { Id = 1, Name = "Customer 1", },
-                    new Stylist { Id = 2, Name = "Customer 2", },
-                    new Stylist { Id = 3, Name = "Customer 3", },
+                    new Stylist { Id = 1, Name = "Stylist 1", },
+                    new Stylist { Id = 2, Name = "Stylist 2", },
+                    new Stylist { Id = 3, Name = "Stylist 3", },
                 }
             );
     }

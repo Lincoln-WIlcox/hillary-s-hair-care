@@ -1,5 +1,5 @@
 
 export const getScheduledAppointments = () =>
 {
-    return fetch("/appointments/scheduled").then(res => res.json())
+    return fetch("/api/appointments/scheduled").then(res => res.json())
 }

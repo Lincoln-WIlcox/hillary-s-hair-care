@@ -11,7 +11,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors();
 
-// allows passing datetimes without time zone data 
+// allows passing datetimes without time zone data
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 // allows our api endpoints to access the database through Entity Framework Core
@@ -25,15 +25,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
     app.UseCors(options =>
-                {
-                    options.AllowAnyOrigin();
-                    options.AllowAnyMethod();
-                    options.AllowAnyHeader();
-                });
+    {
+        options.AllowAnyOrigin();
+        options.AllowAnyMethod();
+        options.AllowAnyHeader();
+    });
 }
 
 app.MapGet(
-    "/appointments/scheduled",
+    "/api/appointments/scheduled",
     (HillaryDbContext db) =>
     {
         List<Appointment> returnAppointments = db

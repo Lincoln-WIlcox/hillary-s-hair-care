@@ -11,7 +11,7 @@ const Appointments = () =>
         getScheduledAppointments().then(
             (appointments) =>
             {
-                console.log(appointments)
+                setAppointments(appointments)
             }
         )
     }
