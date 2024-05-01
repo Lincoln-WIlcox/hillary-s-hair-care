@@ -16,7 +16,8 @@ const StylistList = ({ stylists, onStylistDeleted }) =>
                                 onClick={
                                     (event) => 
                                     {
-
+                                        
+                                        onStylistDeleted()
                                     }
                                 }>delete</button>
                         </div>

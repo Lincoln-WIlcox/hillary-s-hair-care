@@ -96,10 +96,17 @@ app.MapGet(
 
 app.MapGet(
     "/api/stylists",
-    (HillaryDbContext db) =>
+    (HillaryDbContext db, bool? active) =>
     {
+        List<Stylist> returnStylists = db.Stylists.ToList();
+
+        if (active != null)
+        {
+            returnStylists = returnStylists.Where(stylist => stylist.Active == active).ToList();
+        }
+
         return Results.Ok(
-            db.Stylists.Select(stylist => new GetStylistsDTO
+            returnStylists.Select(stylist => new GetStylistsDTO
             {
                 Id = stylist.Id,
                 Name = stylist.Name
@@ -261,6 +268,24 @@ app.MapDelete(
 
         db.Appointments.Remove(appointment);
         db.SaveChanges();
+        return Results.NoContent();
+    }
+);
+
+app.MapDelete(
+    "/api/stylists/{id}",
+    (HillaryDbContext db, int id) =>
+    {
+        Stylist? stylist = db.Stylists.SingleOrDefault(stylist => stylist.Id == id);
+
+        if (stylist == null)
+        {
+            return Results.BadRequest();
+        }
+
+        stylist.Active = false;
+        db.SaveChanges();
+
         return Results.NoContent();
     }
 );

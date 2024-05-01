@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import StylistList from "../components/StylistList"
-import { getStylists } from "../services/stylistsServices"
+import { getActiveStylists } from "../services/stylistsServices"
 
 const StylistPage = () =>
 {
@@ -8,7 +8,7 @@ const StylistPage = () =>
 
     const fetchAndSetStylists = () =>
     {
-        getStylists().then(setStylists)
+        getActiveStylists().then(setStylists)
     }
 
     useEffect(
@@ -16,7 +16,7 @@ const StylistPage = () =>
         {
             fetchAndSetStylists()
         }, []
-    ) 
+    )
 
     return <StylistList stylists={stylists} />
 }
