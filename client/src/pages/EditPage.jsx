@@ -6,7 +6,13 @@ const EditPage = () =>
 {
     const { appointmentId } = useParams()
 
-    return <EditForm appointmentId={appointmentId} onAppointmentSubmitted={putAppointment} />
+    const onAppointmentSubmitted = (appointment) =>
+    {
+        appointment.id = appointmentId
+        putAppointment(appointment)
+    }
+
+    return <EditForm appointmentId={appointmentId} onAppointmentSubmitted={onAppointmentSubmitted} />
 }
 
 export default EditPage
