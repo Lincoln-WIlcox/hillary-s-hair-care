@@ -137,6 +137,58 @@ app.MapGet(
     }
 );
 
+app.MapPost(
+    "/api/appointments",
+    (HillaryDbContext db, PostAppointmentsDTO postAppointment) =>
+    {
+        Stylist? stylist = db.Stylists.SingleOrDefault(stylist =>
+            stylist.Id == postAppointment.StylistId
+        );
+        Customer? customer = db.Customers.SingleOrDefault(customer =>
+            customer.Id == postAppointment.CustomerId
+        );
+
+        if (stylist == null || customer == null)
+        {
+            return Results.BadRequest();
+        }
+
+        Appointment newAppointment = new Appointment
+        {
+            StylistId = postAppointment.StylistId,
+            CustomerId = postAppointment.CustomerId,
+            ScheduledDate = postAppointment.ScheduledDate
+        };
+        db.Appointments.Add(newAppointment);
+        db.SaveChanges();
+
+        foreach (int serviceId in postAppointment.ServiceIds)
+        {
+            Service? service = db.Services.SingleOrDefault(srv => srv.Id == serviceId);
+            if (service == null)
+            {
+                return Results.BadRequest();
+            }
+
+            db.AppointmentServices.Add(
+                new AppointmentService { AppointmentId = newAppointment.Id, ServiceId = serviceId }
+            );
+        }
+        db.SaveChanges();
+
+        return Results.Created(
+            $"/api/appointments/{newAppointment.Id}",
+            new PostAppointmentReturnDTO
+            {
+                Id = newAppointment.Id,
+                StylistId = newAppointment.StylistId,
+                CustomerId = newAppointment.CustomerId,
+                ScheduledDate = newAppointment.ScheduledDate
+            }
+        );
+    }
+);
+
 app.MapPut(
     "/api/appointments/{id}",
     (HillaryDbContext db, PutAppointmentsDTO putAppointment, int id) =>
@@ -180,6 +232,12 @@ app.MapPut(
 
         foreach (int serviceId in putAppointment.ServiceIds)
         {
+            Service? service = db.Services.SingleOrDefault(srv => srv.Id == serviceId);
+            if (service == null)
+            {
+                return Results.BadRequest();
+            }
+
             db.AppointmentServices.Add(
                 new AppointmentService { AppointmentId = id, ServiceId = serviceId }
             );
