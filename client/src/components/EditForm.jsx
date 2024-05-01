@@ -1,7 +1,8 @@
 
 const EditForm = () =>
 {
-    return <p>Edit Form</p>
+    return <div>
+    </div>
 }
 
 export default EditForm

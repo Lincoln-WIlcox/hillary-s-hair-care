@@ -70,6 +70,20 @@ app.MapGet(
     }
 );
 
+app.MapGet(
+    "/api/stylists",
+    (HillaryDbContext db) =>
+    {
+        return Results.Ok(
+            db.Stylists.Select(stylist => new GetStylistsDTO
+            {
+                Id = stylist.Id,
+                Name = stylist.Name
+            })
+        );
+    }
+);
+
 app.MapPut(
     "/api/appointments/{id}",
     (HillaryDbContext db, PutAppointmentsDTO putAppointment, int id) =>
