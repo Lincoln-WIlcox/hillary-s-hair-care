@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Outlet, Route, Routes } from 'react-router-dom'
 import Navbar from './Navbar'
 import Appointments from './pages/Appointments'
+import EditPage from './pages/EditPage'
 
 function App()
 {
@@ -15,7 +16,9 @@ function App()
           <Outlet />
         </>
       }>
-        <Route index element={<Appointments />} />
+        <Route index element={<p>home</p>} />
+        <Route path="/appointments" element={<Appointments />} />
+        <Route path="/appointments/:appointmentId/edit" element={<EditPage />} />
       </Route>
     </Routes>
   )

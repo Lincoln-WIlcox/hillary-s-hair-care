@@ -70,6 +70,126 @@ app.MapGet(
     }
 );
 
+app.MapGet(
+    "/api/appointments/{id}/services",
+    (HillaryDbContext db, int id) =>
+    {
+        Appointment? appointment = db.Appointments.SingleOrDefault(app => app.Id == id);
+
+        if (appointment == null)
+        {
+            return Results.BadRequest();
+        }
+
+        return Results.Ok(
+            db.AppointmentServices.Include(aps => aps.Service)
+                .Where(aps => aps.AppointmentId == id)
+                .Select(aps => new GetAppointmentServicesDTO
+                {
+                    Id = aps.Service.Id,
+                    Name = aps.Service.Name,
+                    Price = aps.Service.Price
+                })
+        );
+    }
+);
+
+app.MapGet(
+    "/api/stylists",
+    (HillaryDbContext db) =>
+    {
+        return Results.Ok(
+            db.Stylists.Select(stylist => new GetStylistsDTO
+            {
+                Id = stylist.Id,
+                Name = stylist.Name
+            })
+        );
+    }
+);
+
+app.MapGet(
+    "/api/customers",
+    (HillaryDbContext db) =>
+    {
+        return Results.Ok(
+            db.Customers.Select(customer => new GetCustomersDTO
+            {
+                Id = customer.Id,
+                Name = customer.Name
+            })
+        );
+    }
+);
+
+app.MapGet(
+    "/api/services",
+    (HillaryDbContext db) =>
+    {
+        return Results.Ok(
+            db.Services.Select(service => new GetServicesDTO
+            {
+                Id = service.Id,
+                Name = service.Name,
+                Price = service.Price
+            })
+        );
+    }
+);
+
+app.MapPut(
+    "/api/appointments/{id}",
+    (HillaryDbContext db, PutAppointmentsDTO putAppointment, int id) =>
+    {
+        Stylist? stylist = db.Stylists.SingleOrDefault(stylist =>
+            stylist.Id == putAppointment.StylistId
+        );
+        Customer? customer = db.Customers.SingleOrDefault(customer =>
+            customer.Id == putAppointment.CustomerId
+        );
+
+        if (stylist == null || customer == null)
+        {
+            return Results.BadRequest();
+        }
+
+        Appointment? existingAppointment = db.Appointments.SingleOrDefault(app => app.Id == id);
+
+        if (existingAppointment != null)
+        {
+            db.Appointments.Remove(existingAppointment);
+        }
+
+        db.Appointments.Add(
+            new Appointment
+            {
+                Id = id,
+                StylistId = putAppointment.StylistId,
+                CustomerId = putAppointment.CustomerId,
+                ScheduledDate = putAppointment.ScheduledDate
+            }
+        );
+
+        foreach (AppointmentService aps in db.AppointmentServices)
+        {
+            if (aps.AppointmentId == id)
+            {
+                db.AppointmentServices.Remove(aps);
+            }
+        }
+
+        foreach (int serviceId in putAppointment.ServiceIds)
+        {
+            db.AppointmentServices.Add(
+                new AppointmentService { AppointmentId = id, ServiceId = serviceId }
+            );
+        }
+
+        db.SaveChanges();
+        return Results.Ok();
+    }
+);
+
 app.MapDelete(
     "/api/appointments/{id}",
     (HillaryDbContext db, int id) =>
