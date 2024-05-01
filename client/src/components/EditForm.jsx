@@ -12,6 +12,7 @@ const EditForm = ({ appointmentId }) =>
     const [selectedServiceIds, setSelectedServiceIds] = useState([])
     const [selectedStylistId, setSelectedStylist] = useState(0)
     const [selectedCustomerId, setSelectedCustomerId] = useState(0)
+    const [selectedScheduledDate, setSelectedScheduledDate] = useState(Date.now)
 
     const fetchAndSetState = () =>
     {
@@ -72,6 +73,12 @@ const EditForm = ({ appointmentId }) =>
                 )
             }
         </select>
+        <input type="datetime-local" onChange={
+            (event) =>
+            {
+                setSelectedScheduledDate(event.target.value)
+            }
+        } />
     </div>
 }
 
