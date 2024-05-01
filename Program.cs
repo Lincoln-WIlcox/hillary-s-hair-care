@@ -70,6 +70,14 @@ app.MapGet(
     }
 );
 
+app.MapDelete(
+    "/appointments/{id}",
+    (int id) =>
+    {
+
+    }
+);
+
 app.UseHttpsRedirection();
 
 app.Run();
