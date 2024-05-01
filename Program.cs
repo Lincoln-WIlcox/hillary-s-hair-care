@@ -72,7 +72,7 @@ app.MapGet(
 
 app.MapPut(
     "/api/appointments",
-    (HillaryDbContext db, int id) =>
+    (HillaryDbContext db, PutAppointmentsDTO appointment) =>
     {
 
     }
