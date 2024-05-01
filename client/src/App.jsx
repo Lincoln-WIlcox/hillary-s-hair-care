@@ -15,7 +15,9 @@ function App()
           <Outlet />
         </>
       }>
-        <Route index element={<Appointments />} />
+        <Route index element={<p>home</p>} />
+        <Route path="/appointments" element={<Appointments />} />
+        <Route path="/appointments/edit" element={<p>edit page</p>} />
       </Route>
     </Routes>
   )
