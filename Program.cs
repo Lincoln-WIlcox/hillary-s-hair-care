@@ -74,6 +74,18 @@ app.MapPut(
     "/api/appointments/{id}",
     (HillaryDbContext db, PutAppointmentsDTO putAppointment, int id) =>
     {
+        Stylist? stylist = db.Stylists.SingleOrDefault(stylist =>
+            stylist.Id == putAppointment.StylistId
+        );
+        Customer? customer = db.Customers.SingleOrDefault(customer =>
+            customer.Id == putAppointment.CustomerId
+        );
+
+        if (stylist == null || customer == null)
+        {
+            return Results.BadRequest();
+        }
+
         Appointment? existingAppointment = db.Appointments.SingleOrDefault(app => app.Id == id);
 
         if (existingAppointment != null)
@@ -102,15 +114,11 @@ app.MapPut(
         foreach (int serviceId in putAppointment.ServiceIds)
         {
             db.AppointmentServices.Add(
-                new AppointmentService
-                {
-                    Id = db.AppointmentServices.Max(app => app.Id) + 1,
-                    AppointmentId = id,
-                    ServiceId = serviceId
-                }
+                new AppointmentService { AppointmentId = id, ServiceId = serviceId }
             );
         }
 
+        db.SaveChanges();
         return Results.Ok();
     }
 );
