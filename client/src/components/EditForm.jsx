@@ -3,8 +3,9 @@ import { getStylists } from "../services/stylistsServices"
 import { getCustomers } from "../services/customersServices"
 import { getServices } from "../services/servicesServices"
 import { getServicesForAppointment } from "../services/appointmentsServices"
+import { useNavigate } from "react-router-dom"
 
-const EditForm = ({ appointmentId }) =>
+const EditForm = ({ appointmentId, onAppointmentSubmitted }) =>
 {
     const [allStylists, setAllStylists] = useState([])
     const [allCustomers, setAllCustomers] = useState([])
@@ -13,6 +14,8 @@ const EditForm = ({ appointmentId }) =>
     const [selectedStylistId, setSelectedStylist] = useState(0)
     const [selectedCustomerId, setSelectedCustomerId] = useState(0)
     const [selectedScheduledDate, setSelectedScheduledDate] = useState("")
+
+    const navigate = useNavigate()
 
     const fetchAndSetState = () =>
     {
@@ -33,7 +36,17 @@ const EditForm = ({ appointmentId }) =>
     {
         if(formIsValid())
         {
-            
+            let appointment =
+            {
+                id: appointmentId,
+                customerId: selectedCustomerId,
+                stylistId: selectedStylistId,
+                scheduledDate: selectedScheduledDate,
+                serviceIds: selectedServiceIds
+            }
+            onAppointmentSubmitted(appointment).then(
+                navigate("/appointments")
+            )
         } else
         {
             window.alert("form is invalid")
