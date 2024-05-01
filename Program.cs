@@ -71,34 +71,6 @@ app.MapGet(
 );
 
 app.MapGet(
-    "/api/stylists",
-    (HillaryDbContext db) =>
-    {
-        return Results.Ok(
-            db.Stylists.Select(stylist => new GetStylistsDTO
-            {
-                Id = stylist.Id,
-                Name = stylist.Name
-            })
-        );
-    }
-);
-
-app.MapGet(
-    "/api/customers",
-    (HillaryDbContext db) =>
-    {
-        return Results.Ok(
-            db.Customers.Select(stylist => new GetCustomersDTO
-            {
-                Id = stylist.Id,
-                Name = stylist.Name
-            })
-        );
-    }
-);
-
-app.MapGet(
     "/api/appointments/{id}/services",
     (HillaryDbContext db, int id) =>
     {
@@ -118,6 +90,49 @@ app.MapGet(
                     Name = aps.Service.Name,
                     Price = aps.Service.Price
                 })
+        );
+    }
+);
+
+app.MapGet(
+    "/api/stylists",
+    (HillaryDbContext db) =>
+    {
+        return Results.Ok(
+            db.Stylists.Select(stylist => new GetStylistsDTO
+            {
+                Id = stylist.Id,
+                Name = stylist.Name
+            })
+        );
+    }
+);
+
+app.MapGet(
+    "/api/customers",
+    (HillaryDbContext db) =>
+    {
+        return Results.Ok(
+            db.Customers.Select(customer => new GetCustomersDTO
+            {
+                Id = customer.Id,
+                Name = customer.Name
+            })
+        );
+    }
+);
+
+app.MapGet(
+    "/api/services",
+    (HillaryDbContext db) =>
+    {
+        return Results.Ok(
+            db.Services.Select(service => new GetServicesDTO
+            {
+                Id = service.Id,
+                Name = service.Name,
+                Price = service.Price
+            })
         );
     }
 );
