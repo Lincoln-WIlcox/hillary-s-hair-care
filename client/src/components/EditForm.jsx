@@ -12,7 +12,7 @@ const EditForm = ({ appointmentId }) =>
     const [selectedServiceIds, setSelectedServiceIds] = useState([])
     const [selectedStylistId, setSelectedStylist] = useState(0)
     const [selectedCustomerId, setSelectedCustomerId] = useState(0)
-    const [selectedScheduledDate, setSelectedScheduledDate] = useState(Date.now)
+    const [selectedScheduledDate, setSelectedScheduledDate] = useState("")
 
     const fetchAndSetState = () =>
     {
@@ -28,6 +28,22 @@ const EditForm = ({ appointmentId }) =>
             fetchAndSetState()
         }, [appointmentId]
     )
+
+    const onSubmitPressed = () =>
+    {
+        if(formIsValid())
+        {
+
+        } else
+        {
+            window.alert("state is invalid")
+        }
+    }
+
+    const formIsValid = () =>
+    {
+        return selectedServiceIds.length > 0 && selectedStylistId != 0 && selectedCustomerId != 0 && selectedScheduledDate != ""
+    }
 
     return <div>
         {
@@ -79,6 +95,9 @@ const EditForm = ({ appointmentId }) =>
                 setSelectedScheduledDate(event.target.value)
             }
         } />
+        <div>
+            <button onClick={onSubmitPressed}>Submit</button>
+        </div>
     </div>
 }
 
