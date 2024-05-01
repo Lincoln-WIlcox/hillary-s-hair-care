@@ -79,16 +79,17 @@ app.MapPut(
         if (existingAppointment != null)
         {
             db.Appointments.Remove(existingAppointment);
-            db.Appointments.Add(
-                new Appointment
-                {
-                    Id = id,
-                    StylistId = putAppointment.StylistId,
-                    CustomerId = putAppointment.CustomerId,
-                    ScheduledDate = putAppointment.ScheduledDate
-                }
-            );
         }
+
+        db.Appointments.Add(
+            new Appointment
+            {
+                Id = id,
+                StylistId = putAppointment.StylistId,
+                CustomerId = putAppointment.CustomerId,
+                ScheduledDate = putAppointment.ScheduledDate
+            }
+        );
     }
 );
 
