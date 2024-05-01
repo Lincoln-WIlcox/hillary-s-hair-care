@@ -25,7 +25,7 @@ const Appointments = () =>
 
 
     return (
-        <AppointmentList appointments={appointments} />
+        <AppointmentList appointments={appointments} onAppointmentDeleted={fetchAppointments} />
     )
 }
 

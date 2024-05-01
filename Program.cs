@@ -70,6 +70,23 @@ app.MapGet(
     }
 );
 
+app.MapDelete(
+    "/api/appointments/{id}",
+    (HillaryDbContext db, int id) =>
+    {
+        Appointment? appointment = db.Appointments.SingleOrDefault(app => app.Id == id);
+
+        if (appointment == null)
+        {
+            return Results.BadRequest();
+        }
+
+        db.Appointments.Remove(appointment);
+        db.SaveChanges();
+        return Results.NoContent();
+    }
+);
+
 app.UseHttpsRedirection();
 
 app.Run();
