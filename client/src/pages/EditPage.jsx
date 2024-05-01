@@ -5,7 +5,7 @@ const EditPage = () =>
 {
     const { appointmentId } = useParams()
 
-    return <EditForm />
+    return <EditForm appointmentId={appointmentId} />
 }
 
 export default EditPage
