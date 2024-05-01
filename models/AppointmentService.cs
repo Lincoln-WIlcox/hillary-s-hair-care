@@ -12,5 +12,5 @@ public class AppointmentService
     [Required]
     public int ServiceId { get; set; }
     public Appointment? Appointment { get; set; }
-    public Service? service { get; set; }
+    public Service? Service { get; set; }
 }

@@ -16,4 +16,5 @@ public class Appointment
     public DateTime ScheduledDate { get; set; }
     public Stylist? Stylist { get; set; }
     public Customer? Customer { get; set; }
+    public List<AppointmentService> AppointmentServices { get; set; }
 }

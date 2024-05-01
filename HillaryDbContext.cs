@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 
 public class HillaryDbContext : DbContext
 {
-    public DbSet<Appointment> Reservations { get; set; }
-    public DbSet<AppointmentService> UserProfiles { get; set; }
-    public DbSet<Customer> Campsites { get; set; }
-    public DbSet<Service> CampsiteTypes { get; set; }
+    public DbSet<Appointment> Appointments { get; set; }
+    public DbSet<AppointmentService> AppointmentServices { get; set; }
+    public DbSet<Customer> Customers { get; set; }
+    public DbSet<Service> Services { get; set; }
     public DbSet<Stylist> Stylists { get; set; }
 
     public HillaryDbContext(DbContextOptions<HillaryDbContext> context)
@@ -25,7 +25,7 @@ public class HillaryDbContext : DbContext
                         Id = 1,
                         StylistId = 1,
                         CustomerId = 1,
-                        ScheduledDate = new DateTime(2025, 2, 3)
+                        ScheduledDate = new DateTime(2024, 2, 3)
                     },
                     new Appointment
                     {
@@ -127,25 +127,25 @@ public class HillaryDbContext : DbContext
                     new Service
                     {
                         Id = 1,
-                        Name = "Customer 1",
+                        Name = "Service 1",
                         Price = 12.99M
                     },
                     new Service
                     {
                         Id = 2,
-                        Name = "Customer 2",
+                        Name = "Service 2",
                         Price = 13.99M
                     },
                     new Service
                     {
                         Id = 3,
-                        Name = "Customer 3",
+                        Name = "Service 3",
                         Price = 14.99M
                     },
                     new Service
                     {
                         Id = 4,
-                        Name = "Customer 4",
+                        Name = "Service 4",
                         Price = 15.99M
                     },
                 }
@@ -156,9 +156,9 @@ public class HillaryDbContext : DbContext
             .HasData(
                 new Stylist[]
                 {
-                    new Stylist { Id = 1, Name = "Customer 1", },
-                    new Stylist { Id = 2, Name = "Customer 2", },
-                    new Stylist { Id = 3, Name = "Customer 3", },
+                    new Stylist { Id = 1, Name = "Stylist 1", },
+                    new Stylist { Id = 2, Name = "Stylist 2", },
+                    new Stylist { Id = 3, Name = "Stylist 3", },
                 }
             );
     }

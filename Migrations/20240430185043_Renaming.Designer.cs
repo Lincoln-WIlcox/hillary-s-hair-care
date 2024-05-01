@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -10,9 +11,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Hillary.Migrations
 {
     [DbContext(typeof(HillaryDbContext))]
-    partial class HillaryDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240430185043_Renaming")]
+    partial class Renaming
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -212,25 +215,25 @@ namespace Hillary.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Service 1",
+                            Name = "Customer 1",
                             Price = 12.99m
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Service 2",
+                            Name = "Customer 2",
                             Price = 13.99m
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Service 3",
+                            Name = "Customer 3",
                             Price = 14.99m
                         },
                         new
                         {
                             Id = 4,
-                            Name = "Service 4",
+                            Name = "Customer 4",
                             Price = 15.99m
                         });
                 });
@@ -255,17 +258,17 @@ namespace Hillary.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Stylist 1"
+                            Name = "Customer 1"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Stylist 2"
+                            Name = "Customer 2"
                         },
                         new
                         {
                             Id = 3,
-                            Name = "Stylist 3"
+                            Name = "Customer 3"
                         });
                 });
 
@@ -291,12 +294,12 @@ namespace Hillary.Migrations
             modelBuilder.Entity("Hillary.Models.AppointmentService", b =>
                 {
                     b.HasOne("Hillary.Models.Appointment", "Appointment")
-                        .WithMany("AppointmentServices")
+                        .WithMany()
                         .HasForeignKey("AppointmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Hillary.Models.Service", "Service")
+                    b.HasOne("Hillary.Models.Service", "service")
                         .WithMany()
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -304,12 +307,7 @@ namespace Hillary.Migrations
 
                     b.Navigation("Appointment");
 
-                    b.Navigation("Service");
-                });
-
-            modelBuilder.Entity("Hillary.Models.Appointment", b =>
-                {
-                    b.Navigation("AppointmentServices");
+                    b.Navigation("service");
                 });
 #pragma warning restore 612, 618
         }

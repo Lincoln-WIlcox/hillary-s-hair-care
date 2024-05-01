@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Outlet, Route, Routes } from 'react-router-dom'
 import Navbar from './Navbar'
+import Appointments from './pages/Appointments'
 
 function App()
 {
@@ -14,7 +15,7 @@ function App()
           <Outlet />
         </>
       }>
-
+        <Route index element={<Appointments />} />
       </Route>
     </Routes>
   )
