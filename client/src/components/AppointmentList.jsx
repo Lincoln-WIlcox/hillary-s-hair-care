@@ -1,4 +1,5 @@
 import { Fragment } from "react"
+import { deleteAppointment } from "../services/appointmentsServices"
 
 
 const AppointmentList = ({ appointments }) =>
@@ -26,6 +27,14 @@ const AppointmentList = ({ appointments }) =>
                                     )
                                 }
                             </div>
+                            <button
+                                value={appointment.id}
+                                onClick={
+                                    (event) => 
+                                    {
+                                        deleteAppointment(event.target.value)
+                                    }
+                                }>delete</button>
                         </div>
                     </Fragment>
                 )
