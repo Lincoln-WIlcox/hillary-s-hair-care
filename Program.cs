@@ -70,6 +70,14 @@ app.MapGet(
     }
 );
 
+app.MapPut(
+    "/api/appointments",
+    (HillaryDbContext db, int id) =>
+    {
+
+    }
+);
+
 app.MapDelete(
     "/api/appointments/{id}",
     (HillaryDbContext db, int id) =>
