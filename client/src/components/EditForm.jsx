@@ -10,6 +10,8 @@ const EditForm = ({ appointmentId }) =>
     const [allCustomers, setAllCustomers] = useState([])
     const [allServices, setAllServices] = useState([])
     const [selectedServiceIds, setSelectedServiceIds] = useState([])
+    const [selectedStylistId, setSelectedStylist] = useState(0)
+    const [selectedCustomerId, setSelectedCustomerId] = useState(0)
 
     const fetchAndSetState = () =>
     {
@@ -29,22 +31,47 @@ const EditForm = ({ appointmentId }) =>
     return <div>
         {
             allServices.map(service =>
-                <div>
+                <div key={"srv" + service.id}>
                     <input type="checkbox" value={service.id} checked={selectedServiceIds.find(serviceId => serviceId == service.id) ? true : false} onChange={(event) => 
                     {
-                        if(event.checked) 
+                        if(selectedServiceIds.find(serviceId => serviceId == service.id)) 
                         {
-                            setSelectedServiceIds([...selectedServiceIds, event.target.value])
+                            setSelectedServiceIds(selectedServiceIds.filter(serviceId => serviceId != service.id))
                         } else
                         {
-                            setSelectedServiceIds(selectedServiceIds.filter(serviceId => serviceId != service.Id))
+                            setSelectedServiceIds([...selectedServiceIds, service.id])
                         }
                     }} name={"srv" + service.id} />
                     <label htmlFor={"srv" + service.id}>{service.name}</label>
                 </div>
-
             )
         }
+        <select onChange={
+            (event) =>
+            {
+                setSelectedStylist(event.target.value)
+            }
+        }>
+            <option value={0}>Choose a stylist</option>
+            {
+                allStylists.map(stylist =>
+                    <option value={stylist.id} key={"st" + stylist.id}>{stylist.name}</option>
+                )
+            }
+        </select>
+        <select onChange={
+            (event) =>
+            {
+                setSelectedCustomerId(event.target.value)
+            }
+        }>
+            <option value={0}>Choose a customer</option>
+            {
+                allCustomers.map(customer =>
+                    <option value={customer.id} key={"st" + customer.id}>{customer.name}</option>
+                )
+            }
+        </select>
     </div>
 }
 
