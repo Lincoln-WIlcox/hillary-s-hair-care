@@ -98,6 +98,25 @@ app.MapGet(
     }
 );
 
+app.MapGet(
+    "/api/appointments/{id}/services",
+    (HillaryDbContext db, int id) =>
+    {
+
+        
+        return Results.Ok(
+            db.AppointmentServices.Include(aps => aps.Service)
+                .Where(aps => aps.AppointmentId == id)
+                .Select(aps => new GetAppointmentServicesDTO
+                {
+                    Id = aps.Service.Id,
+                    Name = aps.Service.Name,
+                    Price = aps.Service.Price
+                })
+        );
+    }
+);
+
 app.MapPut(
     "/api/appointments/{id}",
     (HillaryDbContext db, PutAppointmentsDTO putAppointment, int id) =>
