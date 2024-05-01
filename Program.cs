@@ -84,6 +84,20 @@ app.MapGet(
     }
 );
 
+app.MapGet(
+    "/api/customers",
+    (HillaryDbContext db) =>
+    {
+        return Results.Ok(
+            db.Customers.Select(stylist => new GetCustomersDTO
+            {
+                Id = stylist.Id,
+                Name = stylist.Name
+            })
+        );
+    }
+);
+
 app.MapPut(
     "/api/appointments/{id}",
     (HillaryDbContext db, PutAppointmentsDTO putAppointment, int id) =>
