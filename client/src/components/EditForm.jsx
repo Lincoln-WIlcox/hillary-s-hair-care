@@ -33,10 +33,10 @@ const EditForm = ({ appointmentId }) =>
     {
         if(formIsValid())
         {
-
+            
         } else
         {
-            window.alert("state is invalid")
+            window.alert("form is invalid")
         }
     }
 
