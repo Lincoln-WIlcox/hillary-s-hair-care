@@ -27,6 +27,24 @@ const EditForm = ({ appointmentId }) =>
     )
 
     return <div>
+        {
+            allServices.map(service =>
+                <div>
+                    <input type="checkbox" value={service.id} checked={selectedServiceIds.find(serviceId => serviceId == service.id) ? true : false} onChange={(event) => 
+                    {
+                        if(event.checked) 
+                        {
+                            setSelectedServiceIds([...selectedServiceIds, event.target.value])
+                        } else
+                        {
+                            setSelectedServiceIds(selectedServiceIds.filter(serviceId => serviceId != service.Id))
+                        }
+                    }} name={"srv" + service.id} />
+                    <label htmlFor={"srv" + service.id}>{service.name}</label>
+                </div>
+
+            )
+        }
     </div>
 }
 
