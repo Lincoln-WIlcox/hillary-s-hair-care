@@ -2,7 +2,7 @@ import { Fragment } from "react"
 import { deleteAppointment } from "../services/appointmentsServices"
 
 
-const AppointmentList = ({ appointments }) =>
+const AppointmentList = ({ appointments, onAppointmentDeleted }) =>
 {
     return (
         <div>
@@ -32,7 +32,7 @@ const AppointmentList = ({ appointments }) =>
                                 onClick={
                                     (event) => 
                                     {
-                                        deleteAppointment(event.target.value)
+                                        deleteAppointment(event.target.value).then(onAppointmentDeleted)
                                     }
                                 }>delete</button>
                         </div>
