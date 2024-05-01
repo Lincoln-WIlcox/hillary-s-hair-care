@@ -1,7 +1,10 @@
+import { useParams } from "react-router-dom"
 
 const EditPage = () =>
 {
-    return <></>
+    const { appointmentId } = useParams()
+
+    return <p>{appointmentId}</p>
 }
 
 export default EditPage
