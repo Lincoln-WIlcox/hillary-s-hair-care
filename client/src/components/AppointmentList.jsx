@@ -1,3 +1,4 @@
+import { Fragment } from "react"
 
 
 const AppointmentList = ({ appointments }) =>
@@ -6,8 +7,7 @@ const AppointmentList = ({ appointments }) =>
         <div>
             {
                 appointments.map(appointment =>
-                {
-                    return (
+                    <Fragment key={"ap" + appointment.id}>
                         <div>
                             <span>{appointment.scheduledDateText}</span>
                             <span>{appointment.stylist.name}</span>
@@ -18,17 +18,16 @@ const AppointmentList = ({ appointments }) =>
                                     appointment.appointmentServices.map(appointmentService =>
                                     {
                                         return (
-                                            <>
+                                            <Fragment key={"aps" + appointmentService.id}>
                                                 <span>{appointmentService.service.name}</span>
-                                            </>
+                                            </Fragment>
                                         )
                                     }
                                     )
                                 }
                             </div>
                         </div>
-                    )
-                }
+                    </Fragment>
                 )
             }
         </div>
