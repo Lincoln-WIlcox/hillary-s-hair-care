@@ -18,7 +18,7 @@ const StylistPage = () =>
         }, []
     )
 
-    return <StylistList stylists={stylists} />
+    return <StylistList stylists={stylists} onStylistDeleted={fetchAndSetStylists} />
 }
 
 export default StylistPage

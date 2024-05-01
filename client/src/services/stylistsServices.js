@@ -7,3 +7,11 @@ export const getActiveStylists = async () =>
 {
     return fetch("/api/stylists?active=true").then(res => res.json())
 }
+
+export const deactivateStylist = async (id) =>
+{
+    return fetch(`/api/stylists/${id}`,
+        {
+            method: "DELETE"
+        })
+}
