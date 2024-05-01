@@ -71,10 +71,24 @@ app.MapGet(
 );
 
 app.MapPut(
-    "/api/appointments",
-    (HillaryDbContext db, PutAppointmentsDTO appointment) =>
+    "/api/appointments/{id}",
+    (HillaryDbContext db, PutAppointmentsDTO putAppointment, int id) =>
     {
+        Appointment? existingAppointment = db.Appointments.SingleOrDefault(app => app.Id == id);
 
+        if (existingAppointment != null)
+        {
+            db.Appointments.Remove(existingAppointment);
+            db.Appointments.Add(
+                new Appointment
+                {
+                    Id = id,
+                    StylistId = putAppointment.StylistId,
+                    CustomerId = putAppointment.CustomerId,
+                    ScheduledDate = putAppointment.ScheduledDate
+                }
+            );
+        }
     }
 );
 
