@@ -90,6 +90,28 @@ app.MapPut(
                 ScheduledDate = putAppointment.ScheduledDate
             }
         );
+
+        foreach (AppointmentService aps in db.AppointmentServices)
+        {
+            if (aps.AppointmentId == id)
+            {
+                db.AppointmentServices.Remove(aps);
+            }
+        }
+
+        foreach (int serviceId in putAppointment.ServiceIds)
+        {
+            db.AppointmentServices.Add(
+                new AppointmentService
+                {
+                    Id = db.AppointmentServices.Max(app => app.Id) + 1,
+                    AppointmentId = id,
+                    ServiceId = serviceId
+                }
+            );
+        }
+
+        return Results.Ok();
     }
 );
 
