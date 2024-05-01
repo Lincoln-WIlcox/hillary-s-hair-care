@@ -1,9 +1,12 @@
 import { Fragment } from "react"
 import { deleteAppointment } from "../services/appointmentsServices"
+import { useNavigate } from "react-router-dom"
 
 
 const AppointmentList = ({ appointments, onAppointmentDeleted }) =>
 {
+    const navigate = useNavigate()
+
     return (
         <div>
             {
@@ -36,6 +39,14 @@ const AppointmentList = ({ appointments, onAppointmentDeleted }) =>
                                     }
                                 }>delete</button>
                         </div>
+                        <button
+                            onClick={
+                                (event) =>
+                                {
+                                    navigate(`/appointments/${appointment.id}/edit`)
+                                }
+                            }
+                        >edit</button>
                     </Fragment>
                 )
             }
