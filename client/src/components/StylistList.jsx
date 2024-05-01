@@ -1,5 +1,5 @@
 import { Fragment } from "react"
-import { useNavigate } from "react-router-dom"
+import { deactivateStylist } from "../services/stylistsServices"
 
 
 const StylistList = ({ stylists, onStylistDeleted }) =>
@@ -16,7 +16,7 @@ const StylistList = ({ stylists, onStylistDeleted }) =>
                                 onClick={
                                     (event) => 
                                     {
-
+                                        deactivateStylist(stylist.id).then(onStylistDeleted)
                                     }
                                 }>delete</button>
                         </div>
