@@ -4,11 +4,10 @@ import Navbar from './Navbar'
 import Appointments from './pages/Appointments'
 import EditPage from './pages/EditPage'
 import AddAppointmentPage from './pages/AddAppointmentPage'
+import StylistPage from './pages/StylistPage'
 
 function App()
 {
-  const [count, setCount] = useState(0)
-
   return (
     <Routes>
       <Route path="/" element={
@@ -18,9 +17,13 @@ function App()
         </>
       }>
         <Route index element={<p>home</p>} />
-        <Route path="/appointments" element={<Appointments />} />
-        <Route path="/appointments/:appointmentId/edit" element={<EditPage />} />
-        <Route path="/appointments/create" element={<AddAppointmentPage />} />
+        <Route path="/appointments">
+          <Route index element={<Appointments />} />
+          <Route path=":appointmentId/edit" element={<EditPage />} />
+          <Route path="create" element={<AddAppointmentPage />} />
+        </Route>
+
+        <Route path="/stylists" element={<StylistPage />} />
       </Route>
     </Routes>
   )
