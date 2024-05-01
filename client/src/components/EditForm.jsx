@@ -22,7 +22,10 @@ const EditForm = ({ appointmentId, onAppointmentSubmitted }) =>
         getStylists().then(setAllStylists)
         getCustomers().then(setAllCustomers)
         getServices().then(setAllServices)
-        getServicesForAppointment(appointmentId).then((services) => setSelectedServiceIds(services.map(service => service.id)))
+        if(appointmentId)
+        {
+            getServicesForAppointment(appointmentId).then((services) => setSelectedServiceIds(services.map(service => service.id)))
+        }
     }
 
     useEffect(
@@ -38,7 +41,6 @@ const EditForm = ({ appointmentId, onAppointmentSubmitted }) =>
         {
             let appointment =
             {
-                id: appointmentId,
                 customerId: selectedCustomerId,
                 stylistId: selectedStylistId,
                 scheduledDate: selectedScheduledDate,
