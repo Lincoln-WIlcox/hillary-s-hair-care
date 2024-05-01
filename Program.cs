@@ -102,8 +102,13 @@ app.MapGet(
     "/api/appointments/{id}/services",
     (HillaryDbContext db, int id) =>
     {
+        Appointment? appointment = db.Appointments.SingleOrDefault(app => app.Id == id);
 
-        
+        if (appointment == null)
+        {
+            return Results.BadRequest();
+        }
+
         return Results.Ok(
             db.AppointmentServices.Include(aps => aps.Service)
                 .Where(aps => aps.AppointmentId == id)
