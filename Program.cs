@@ -214,6 +214,17 @@ app.MapPost(
     }
 );
 
+app.MapPost(
+    "/api/customers",
+    (HillaryDbContext db, PostCustomerDTO postedCustomer) =>
+    {
+        Customer customer = new Customer { Name = postedCustomer.Name };
+        db.Customers.Add(customer);
+        db.SaveChanges();
+        return Results.Ok(new PostCustomerReturnDTO { Id = customer.Id, Name = customer.Name });
+    }
+);
+
 app.MapPut(
     "/api/appointments/{id}",
     (HillaryDbContext db, PutAppointmentsDTO putAppointment, int id) =>
