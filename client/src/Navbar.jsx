@@ -19,8 +19,8 @@ const Navbar = () =>
             <Link to="/customers/create">
                 <button>Add Customers</button>
             </Link>
-            <Link to="/stylists">
-                <button>View Stylists</button>
+            <Link to="/customers">
+                <button>View Customers</button>
             </Link>
         </>
     )
