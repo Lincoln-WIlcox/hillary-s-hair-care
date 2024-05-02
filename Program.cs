@@ -196,6 +196,24 @@ app.MapPost(
     }
 );
 
+app.MapPost(
+    "/api/stylists",
+    (HillaryDbContext db, PostStylistDTO postedStylist) =>
+    {
+        Stylist stylist = new Stylist { Name = postedStylist.Name, Active = true };
+        db.Stylists.Add(stylist);
+        db.SaveChanges();
+        return Results.Ok(
+            new PostStylistReturnDTO
+            {
+                Id = stylist.Id,
+                Name = stylist.Name,
+                Active = stylist.Active
+            }
+        );
+    }
+);
+
 app.MapPut(
     "/api/appointments/{id}",
     (HillaryDbContext db, PutAppointmentsDTO putAppointment, int id) =>
