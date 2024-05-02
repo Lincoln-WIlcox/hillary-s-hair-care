@@ -5,6 +5,7 @@ import Appointments from './pages/Appointments'
 import EditPage from './pages/EditPage'
 import AddAppointmentPage from './pages/AddAppointmentPage'
 import StylistPage from './pages/StylistPage'
+import AddStylistPage from './pages/AddStylistPage'
 
 function App()
 {
@@ -22,8 +23,10 @@ function App()
           <Route path=":appointmentId/edit" element={<EditPage />} />
           <Route path="create" element={<AddAppointmentPage />} />
         </Route>
-
-        <Route path="/stylists" element={<StylistPage />} />
+        <Route path="/stylists">
+          <Route index element={<StylistPage />} />
+          <Route path="/stylists/create" element={<AddStylistPage />} />
+        </Route>
       </Route>
     </Routes>
   )
