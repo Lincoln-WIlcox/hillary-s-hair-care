@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const StylistForm = () =>
+const StylistForm = ({ onStylistSubmitted }) =>
 {
     const [stylistName, setStylistName] = useState("")
 
@@ -8,7 +8,12 @@ const StylistForm = () =>
     {
         if(formIsValid())
         {
-            
+            const stylist =
+            {
+                name: stylistName
+            }
+
+            onStylistSubmitted(stylist)
         } else
         {
             window.alert("form is invalid")

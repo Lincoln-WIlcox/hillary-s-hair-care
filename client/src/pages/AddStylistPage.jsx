@@ -2,7 +2,12 @@ import StylistForm from "../components/StylistForm"
 
 const AddStylistPage = () =>
 {
-    return <StylistForm />
+    const onStylistSubmitted = (stylist) =>
+    {
+        
+    }
+
+    return <StylistForm onStylistSubmitted={onStylistSubmitted}/>
 }
 
 export default AddStylistPage
