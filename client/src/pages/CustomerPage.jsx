@@ -1,7 +1,8 @@
+import CustomerList from "../components/CustomerList"
 
 const CustomerPage = () =>
 {
-    return <>customer page</>
+    return <CustomerList />
 }
 
 export default CustomerPage
