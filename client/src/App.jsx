@@ -6,6 +6,7 @@ import EditPage from './pages/EditPage'
 import AddAppointmentPage from './pages/AddAppointmentPage'
 import StylistPage from './pages/StylistPage'
 import AddStylistPage from './pages/AddStylistPage'
+import CustomerPage from './pages/CustomerPage'
 
 function App()
 {
@@ -26,6 +27,9 @@ function App()
         <Route path="/stylists">
           <Route index element={<StylistPage />} />
           <Route path="/stylists/create" element={<AddStylistPage />} />
+        </Route>
+        <Route path="/customers">
+          <Route index element={<CustomerPage />} />
         </Route>
       </Route>
     </Routes>
