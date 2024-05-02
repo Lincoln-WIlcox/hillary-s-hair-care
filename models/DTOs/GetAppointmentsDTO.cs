@@ -1,5 +1,3 @@
-using System.Globalization;
-
 namespace Hillary.Models.DTOs;
 
 public class GetAppointmentsDTO
