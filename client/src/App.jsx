@@ -7,6 +7,7 @@ import AddAppointmentPage from './pages/AddAppointmentPage'
 import StylistPage from './pages/StylistPage'
 import AddStylistPage from './pages/AddStylistPage'
 import CustomerPage from './pages/CustomerPage'
+import AddCustomerPage from './pages/AddCustomerPage'
 
 function App()
 {
@@ -30,6 +31,7 @@ function App()
         </Route>
         <Route path="/customers">
           <Route index element={<CustomerPage />} />
+          <Route path="/customers/create" element={<AddCustomerPage />} />
         </Route>
       </Route>
     </Routes>
