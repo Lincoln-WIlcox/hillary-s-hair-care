@@ -1,7 +1,8 @@
+import StylistForm from "../components/StylistForm"
 
 const AddStylistPage = () =>
 {
-    return <>stylist page</>
+    return <StylistForm />
 }
 
 export default AddStylistPage
