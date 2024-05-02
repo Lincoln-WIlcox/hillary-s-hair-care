@@ -3,7 +3,7 @@ const CustomerList = ({ customers }) =>
     return <div>
         {
             customers?.map(customer =>
-                <span>{customer.name}</span>)
+                <span key={"c" + customer.id}>{customer.name}</span>)
         }
     </div>
 }
